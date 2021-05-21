@@ -1,56 +1,21 @@
-import styled from 'styled-components/macro'
-import { useEffect, useState } from 'react'
-import githubApi from './service/githubAPI'
-import UserSearch from './components/UserSearch'
-import Header from './components/Header'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import SearchPage from './pages/SearchPage'
+import RepoPage from './pages/RepoPage'
 
-function App() {
-  const [profile, setProfile] = useState({})
-  const [error, setError] = useState('')
-
-  useEffect(() => {
-    githubApi
-      .get('https://api.github.com/user76')
-      .then(response => response.data)
-      .then(setProfile)
-      .catch(error => setError(error.response.status))
-  }, [])
-
-  if (error) {
-    return (
-      <Page>
-        <img src={`https://http.cat/${error}`} alt="" />
-      </Page>
-    )
-  }
-
+export default function App() {
   return (
-    <Page>
-      {console.log(profile)}
-      <Header />
-      <h1>Hallo, {profile.login} 👋🏽</h1>
-      <Avatar src={profile.avatar_url} />
-      <UserSearch />
-    </Page>
+    <Router>
+      <Switch>
+        <Route path={'/'} exact>
+          <SearchPage />
+        </Route>
+        <Route path={'/repos/:username'}>
+          <RepoPage />
+        </Route>
+        <Route path={'/repo/pulls/:username'}>
+          <PullRequestPage />
+        </Route>
+      </Switch>
+    </Router>
   )
 }
-
-export default App
-
-const Page = styled.main`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-`
-
-const Avatar = styled.img`
-  height: 200px;
-  width: 200px;
-  border-radius: 50%;
-`
