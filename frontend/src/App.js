@@ -1,6 +1,8 @@
 import styled from 'styled-components/macro'
 import { useEffect, useState } from 'react'
 import githubApi from './service/githubAPI'
+import UserSearch from './components/UserSearch'
+import Header from './components/Header'
 
 function App() {
   const [profile, setProfile] = useState({})
@@ -8,7 +10,7 @@ function App() {
 
   useEffect(() => {
     githubApi
-      .get('https://api.github.com/user')
+      .get('https://api.github.com/user76')
       .then(response => response.data)
       .then(setProfile)
       .catch(error => setError(error.response.status))
@@ -24,8 +26,11 @@ function App() {
 
   return (
     <Page>
+      {console.log(profile)}
+      <Header />
       <h1>Hallo, {profile.login} 👋🏽</h1>
       <Avatar src={profile.avatar_url} />
+      <UserSearch />
     </Page>
   )
 }

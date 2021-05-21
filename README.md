@@ -6,3 +6,4 @@
 4. copy generated token and paste it into the `env.local` file
 5. `cd frontend` and `npm start` and `HAPPY HACKING`
 
+repos_url: "https://api.github.com/users/yasminwaldeck/repos"
