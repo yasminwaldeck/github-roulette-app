@@ -1,10 +1,9 @@
 import { Link } from 'react-router-dom'
 
-export default function RepoCard({ repo }) {
+export default function RepoCard({ repo, username }) {
   return (
     <div>
-      <Link to={'repos/pull/'}>{repo.name}</Link>
-      <p>{repo.pulls_url}</p>
+      <Link to={'/' + username + '/' + repo.name + '/pulls'}>{repo.name}</Link>
     </div>
   )
 }

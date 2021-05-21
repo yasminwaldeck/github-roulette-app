@@ -15,7 +15,7 @@ export default function RepoPage() {
       <ul>
         {repos.map(repo => (
           <li key={repo.id}>
-            <RepoCard repo={repo} />
+            <RepoCard repo={repo} username={username} />
           </li>
         ))}
       </ul>
